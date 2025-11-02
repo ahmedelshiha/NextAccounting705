@@ -502,13 +502,23 @@ export default function UnifiedPermissionModal({
       {/* Content Area */}
       <div className="flex-1 overflow-hidden">
         <TabsContent value="role" className="h-full p-0 data-[state=inactive]:hidden">
-          <RoleSelectionContent
-            selectedRole={selectedRole}
-            currentRole={currentRole}
-            onSelectRole={handleRoleChange}
-            changes={changes}
-            isMobile={isMobile}
-          />
+          {isRoleForm ? (
+            <RoleDetailsForm
+              roleName={roleName}
+              roleDescription={roleDescription}
+              onRoleNameChange={setRoleName}
+              onRoleDescriptionChange={setRoleDescription}
+              isMobile={isMobile}
+            />
+          ) : (
+            <RoleSelectionContent
+              selectedRole={selectedRole}
+              currentRole={currentRole}
+              onSelectRole={handleRoleChange}
+              changes={changes}
+              isMobile={isMobile}
+            />
+          )}
         </TabsContent>
 
         {allowCustomPermissions && (
