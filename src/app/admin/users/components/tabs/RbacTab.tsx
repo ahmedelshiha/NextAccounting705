@@ -24,6 +24,7 @@ interface Role {
 export function RbacTab() {
   const [roles, setRoles] = useState<Role[]>([])
   const [loadingRoles, setLoadingRoles] = useState(true)
+  const [activeTab, setActiveTab] = useState('roles')
   const [roleModal, setRoleModal] = useState({
     isOpen: false,
     mode: 'create' as 'role-create' | 'role-edit',
