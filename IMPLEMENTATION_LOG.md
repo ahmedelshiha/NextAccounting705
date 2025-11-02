@@ -220,7 +220,16 @@
 - ✅ Metadata and change tracking for all operations
 
 #### Task 3.3: Mobile UI Optimization
-- **Status:** ⏸️ PENDING
+- **Status:** ✅ COMPLETED
+- **Summary:** Improved mobile responsiveness across users list and settings tabs without altering desktop styles.
+- **Files Modified:**
+  - src/app/admin/users/components/UsersTable.tsx
+  - src/app/admin/settings/user-management/components/InvitationSettings.tsx
+  - src/app/admin/settings/user-management/components/SessionManagement.tsx
+  - src/app/admin/settings/user-management/components/RateLimiting.tsx
+  - src/app/admin/settings/user-management/components/OnboardingWorkflows.tsx
+- **Details:** Replaced rigid row layouts (flex justify-between) with responsive stacking (flex-col sm:flex-row), added gap-2 and flex-wrap where needed, adjusted input widths (w-full sm:w-24) to prevent overflow, preserved existing colors and visual style.
+- **Testing Notes:** Verified no visual regressions on desktop; mobile now wraps controls correctly and avoids horizontal scroll.
 - **Effort:** 8-10 hours
 
 ---
@@ -230,12 +239,14 @@
 **Status:** ⏸️ PENDING
 
 #### Task 4.1: Implement Test Suite
-- **Status:** ⏸️ PENDING
+- **Status:** 🔄 IN PROGRESS
 - **Effort:** 20-30 hours
+- **Notes:** Added API tests for user-management settings endpoint (tests/admin-user-management-settings.api.test.ts). Added hook tests (tests/admin/settings-user-management.hook.test.tsx).
 
 #### Task 4.2: Performance Profiling
-- **Status:** ⏸️ PENDING
+- **Status:** ✅ COMPLETED
 - **Effort:** 3-5 hours
+- **Notes:** Added lightweight render profiling to EnterpriseUsersPage using performanceMetrics (tracks mount and tab/user-count re-renders).
 
 ---
 
