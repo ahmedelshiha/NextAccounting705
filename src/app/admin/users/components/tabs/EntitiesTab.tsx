@@ -13,6 +13,7 @@ import { toast } from 'sonner'
 import type { Column } from '@/types/dashboard'
 import { useListState } from '@/hooks/admin/useListState'
 import { useListFilters } from '@/hooks/admin/useListFilters'
+import { useFilterUsers } from '../../hooks/useFilterUsers'
 
 interface ClientItem {
   id: string
