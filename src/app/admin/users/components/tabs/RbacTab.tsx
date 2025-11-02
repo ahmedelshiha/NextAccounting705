@@ -2,7 +2,7 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import RolePermissionsViewer from '@/components/admin/permissions/RolePermissionsViewer'
 import UserPermissionsInspector from '@/components/admin/permissions/UserPermissionsInspector'
-import UnifiedPermissionModal, { RoleFormData } from '@/components/admin/permissions/UnifiedPermissionModal'
+import UnifiedPermissionModal, { RoleFormData, PermissionChangeSet } from '@/components/admin/permissions/UnifiedPermissionModal'
 import { Button } from '@/components/ui/button'
 import { Plus, Edit3, Trash2, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
@@ -102,8 +102,14 @@ export function RbacTab() {
     }
   }, [loadRoles])
 
-  const handleRoleModalSave = useCallback(async (formData: RoleFormData) => {
+  const handleRoleModalSave = useCallback(async (changes: PermissionChangeSet | RoleFormData) => {
     try {
+      // Type guard: ensure we have RoleFormData for role operations
+      if (!('name' in changes && 'description' in changes && 'permissions' in changes)) {
+        throw new Error('Invalid role data provided')
+      }
+
+      const formData = changes as RoleFormData
       const endpoint = roleModal.mode === 'role-create'
         ? '/api/admin/roles'
         : `/api/admin/roles/${formData.id}`
