@@ -31,7 +31,7 @@ export function useUserManagementRealtime(options: RealtimeOptions = {}) {
   const handleRealtimeEvent = useCallback((event: MessageEvent) => {
     try {
       const message = JSON.parse(event.data)
-      
+
       // Filter for user management events
       const userManagementEventTypes = [
         'user-created',
@@ -42,7 +42,7 @@ export function useUserManagementRealtime(options: RealtimeOptions = {}) {
         'user-management-settings-updated'
       ]
 
-      if (userManagementEventTypes.includes(message.type) && autoRefresh) {
+      if (userManagementEventTypes.includes(message.type) && autoRefresh && refreshUsers) {
         // Debounce rapid successive refreshes
         if (debounceTimerRef.current) {
           clearTimeout(debounceTimerRef.current)
