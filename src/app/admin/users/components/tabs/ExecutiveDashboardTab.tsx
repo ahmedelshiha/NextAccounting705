@@ -403,7 +403,10 @@ export function ExecutiveDashboardTab({
                   selectedUserIds={selectedUserIds}
                   onSelectUser={handleSelectUser}
                   onSelectAll={handleSelectAll}
-                  onViewProfile={() => {}}
+                  onViewProfile={(user) => {
+                    context.setSelectedUser(user)
+                    context.setProfileOpen(true)
+                  }}
                 />
               </div>
             </section>
