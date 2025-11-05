@@ -302,6 +302,25 @@
   font-size: 0.875rem;
 }
 
+/* Pagination Section */
+.pagination-section {
+  flex-shrink: 0;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+}
+
+.pagination-info {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
 /* ============================================================================
    INSIGHTS PANEL - Right Column (Fixed Width)
    ============================================================================ */
