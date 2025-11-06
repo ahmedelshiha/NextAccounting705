@@ -126,7 +126,7 @@ export default function DryRunModal({
           {/* Information */}
           <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
             <p className="text-xs text-gray-600">
-              💡 This action can be undone for 24 hours after applying. You'll receive an
+              💡 This action can be undone for 24 hours after applying. You&apos;ll receive an
               undo prompt after the changes are applied.
             </p>
           </div>
