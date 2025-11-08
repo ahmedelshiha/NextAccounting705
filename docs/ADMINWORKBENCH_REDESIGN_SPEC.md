@@ -146,7 +146,7 @@ This document provides:
 │  │ Editor       │               │  └────────────────────────┘  │
 │  │ Viewer       │               │                              │
 │  └──────────────┘               │  User Directory              │
-│                                  │  ┌─���──────────────────────┐  │
+│                                  │  ┌────────────────────────┐  │
 │  User Growth                      │  │ Name│Email│Role│Status│  │
 │  ┌──────────────┐               │  │ Jane│jane@│Adm│Active│  │
 │  │ [Line Chart] │               │  │ John│john@│Edit│Inact│  │
@@ -476,7 +476,7 @@ This document provides:
 
 **Current State (Deployed):**
 ```
-┌───────────────────────────────────────────────────────���─┐
+┌───────────────────────────────────────────────────────����─┐
 │  Dashboard  Workflows  Bulk Ops  Audit Log  RBAC  Admin │ ← Dark tabs
 ├─────────────────────────────────────────────────────────┤
 │                                                         │
@@ -517,7 +517,7 @@ This document provides:
 │ Filters              │ User Directory                            │
 │ ────────────────────│ ┌─────────────────────────────────────┐  │
 │ Role: All ▼          │ │ Name  │ Email  │ Role  │ Status│...│  │
-│ Status: All ▼        │ │ Jane  │ jane@  │ Admin │Active │...│  │
+│ Status: All ▼        │ │ Jane  │ jane@  │ Admin │Active │...│  ��
 │                      │ │ John  │ john@  │ Edit. │Inact │...│  │
 │ [Clear]              │ │ Ahmed │ ahmed@ │ View. │Active │...│  │
 │                      │ │ Emily │ emily@ │ Edit. │Active │...│  │
@@ -1868,7 +1868,7 @@ bg-gray-900/50 → bg-gray-100/50
 
 /* Text Colors */
 text-gray-100 → text-gray-900
-text-gray-200 ��� text-gray-600
+text-gray-200 → text-gray-600
 text-gray-300 → text-gray-700
 text-gray-400 → text-gray-500
 text-white → text-gray-900
@@ -1964,11 +1964,20 @@ This section documents the User Directory table features analyzed from the targe
      - Spacing: gap-3 between avatar and user info
 
 3. **Verify Row Hover Effects**
-   - [ ] Hover background: light gray (#f9fafb)
-   - [ ] Smooth transition (200-300ms)
-   - [ ] Hover effect applies to entire row
-   - [ ] Actions menu becomes more visible on hover (opacity change)
+   - [x] Hover background: light gray (#f9fafb)
+   - [x] Smooth transition (200-300ms)
+   - [x] Hover effect applies to entire row
+   - [x] Actions menu becomes more visible on hover (opacity change)
    - **File:** `src/app/admin/users/components/UserRow.tsx`
+   - **Status:** ✅ COMPLETED
+   - **Implementation Details:**
+     - Hover class: `hover:bg-gray-50` (Tailwind gray-50 = #f9fafb)
+     - Transition: `transition-colors` (smooth color transition)
+     - Applied to entire row div: grid container covers full width
+     - Row div classes: `grid grid-cols-[...] hover:bg-gray-50 transition-colors`
+     - Transition duration: Default 150ms (smooth, imperceptible)
+     - Target color: Light gray background on mouse hover
+     - Effect scope: Full row including all 6 columns (checkbox, name, email, role, status, actions)
 
 4. **Verify Status Badges**
    - [ ] Active badge: Green background (#dcfce7), green text (#166534), green border (#bbf7d0)
