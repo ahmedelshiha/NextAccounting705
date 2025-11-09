@@ -233,11 +233,12 @@ export const SettingsTab = memo(function SettingsTab({ user }: SettingsTabProps)
             </div>
             <Button
               variant="outline"
+              disabled={isDeactivating}
               className="w-full text-orange-700 border-orange-300 hover:bg-orange-100 flex items-center gap-2"
               onClick={() => setShowDeactivateDialog(true)}
             >
               <Pause className="h-4 w-4" />
-              Deactivate User
+              {isDeactivating ? 'Deactivating...' : 'Deactivate User'}
             </Button>
           </div>
         </div>
