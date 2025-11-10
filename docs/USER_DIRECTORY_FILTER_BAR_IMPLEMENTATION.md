@@ -6,7 +6,7 @@
 
 ---
 
-## 📋 TABLE OF CONTENTS
+## ��� TABLE OF CONTENTS
 
 1. [Completed Phases (1-12)](#completed-phases)
 2. [Pending Phases (13-20)](#pending-phases)
@@ -509,7 +509,111 @@ See: [PHASE_7_ADVANCED_QUERY_BUILDER.md](./PHASE_7_ADVANCED_QUERY_BUILDER.md)
 
 ---
 
-## ⏳ PENDING PHASES (14-20)
+### Phase 14: Custom Report Builder (v3.0)
+**Status:** ✅ Completed
+**Estimated Effort:** 6-8 hours
+**Priority:** High
+**Target Release:** Q2-Q3 2025
+
+#### Tasks:
+
+1. **Report Design UI** ✅
+   - [x] Create `ReportBuilder` component and utilities
+   - [x] Drag-and-drop report sections support
+   - [x] Choose columns to include
+   - [x] Grouping options (by role, status, etc.)
+   - [x] Summary calculations (count, sum, avg, min, max, distinct)
+   - [x] Sorting controls
+   - [x] Visual report preview with HTML generation
+
+2. **Report Templates** ✅
+   - [x] Create pre-built report layouts
+   - [x] Save custom report templates
+   - [x] Template library/gallery with 3 default templates
+   - [x] Template sharing and categorization
+   - [x] Template import/export support
+
+3. **Scheduled Reports** ✅
+   - [x] Schedule report generation (via Phase 13 export scheduler)
+   - [x] Auto-email recipients
+   - [x] Report archive/history with execution tracking
+   - [x] Execution logs with status and error handling
+
+4. **Report API** ✅
+   - [x] `POST /api/admin/reports` - Create report
+   - [x] `GET /api/admin/reports` - List reports with pagination
+   - [x] `GET /api/admin/reports/:id` - Get report details
+   - [x] `GET /api/admin/reports/:id/generate` - Generate report in specified format
+   - [x] `PATCH /api/admin/reports/:id` - Update report configuration
+   - [x] `DELETE /api/admin/reports/:id` - Delete report
+
+#### New Files Created:
+- `src/app/admin/users/types/report-builder.ts` (332 lines)
+  - Type definitions for reports, sections, templates
+  - Pre-built templates: Active Users, Department Overview, Role Analysis
+  - Available columns configuration
+  - Report presets
+
+- `src/app/admin/users/utils/report-builder.ts` (650 lines)
+  - `generateReportHTML()` - Create formatted HTML for reports
+  - `calculateSummaryStats()` - Generate summary statistics
+  - `applyFilters()` - Filter data based on criteria
+  - `applySorting()` - Sort data
+  - `applyGrouping()` - Group data
+  - Report validation and data processing utilities
+  - JSON import/export functions
+
+- `src/app/admin/users/hooks/useReportBuilder.ts` (441 lines)
+  - `useReportBuilder()` - Main hook for report management
+  - `useSingleReport()` - Single report loading
+  - Full CRUD operations
+  - Template management
+  - Report generation and export
+
+- `src/app/api/admin/reports/route.ts` (193 lines)
+  - GET - List reports with search and pagination
+  - POST - Create new report
+
+- `src/app/api/admin/reports/[id]/route.ts` (190 lines)
+  - GET - Fetch specific report
+  - PATCH - Update report configuration
+  - DELETE - Delete report with cascading cleanup
+
+- `src/app/api/admin/reports/[id]/generate/route.ts` (249 lines)
+  - POST - Generate report in PDF, XLSX, CSV, or JSON format
+  - Filters support
+  - Execution tracking
+  - Error handling and recovery
+
+#### Database Schema Updates:
+- Added `Report` model with full configuration support
+- Added `ReportExecution` model for tracking generation
+- Added relations to `User` and `Tenant`
+- Proper indexing for performance optimization
+
+#### Key Features:
+- Support for 4 section types: summary, details, table, chart
+- 6 aggregation types for calculations: sum, count, average, min, max, distinct
+- Flexible filtering and sorting
+- Data grouping with subtotals
+- Multiple export formats: PDF, Excel, CSV, JSON
+- 3 pre-built templates (Active Users, Department, Roles)
+- Template library with public/private access
+- Report execution history with timestamp and size tracking
+- Permission-based access control
+- Rate limiting on all endpoints
+
+#### Implementation Quality:
+- Full TypeScript with comprehensive type safety
+- Proper error handling and validation
+- Accessible API design with RESTful endpoints
+- Pagination support for large result sets
+- Transaction handling for data consistency
+- Comprehensive logging for debugging
+
+---
+
+## ⏳ PENDING PHASES (15-20)
 
 ---
 
