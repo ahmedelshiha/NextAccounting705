@@ -27,6 +27,8 @@ export interface FilteredUsersResponse {
   page: number
   limit: number
   totalPages: number
+  isStale?: boolean
+  staleSince?: FilteredUsersResponse
 }
 
 /**
