@@ -202,6 +202,11 @@ export default function AdminSidebar({
           height: 100%;
           padding: 1rem;
           gap: 0.5rem;
+          transition: padding 0.3s ease;
+        }
+
+        .admin-sidebar-wrapper[data-collapsed="true"] {
+          padding: 0.75rem 0.5rem;
         }
 
         .admin-sidebar-header {
@@ -211,6 +216,26 @@ export default function AdminSidebar({
           padding-bottom: 0.75rem;
           border-bottom: 1px solid #e5e7eb;
           gap: 0.5rem;
+          transition: padding-bottom 0.3s ease;
+        }
+
+        .admin-sidebar-wrapper[data-collapsed="true"] .admin-sidebar-header {
+          padding-bottom: 0.5rem;
+          border-bottom: none;
+        }
+
+        .admin-sidebar-title {
+          transition: opacity 0.3s ease;
+        }
+
+        .admin-sidebar-header-actions {
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+
+        .admin-sidebar-toggle-btn {
+          transition: transform 0.3s ease;
         }
 
         .admin-sidebar-content {
