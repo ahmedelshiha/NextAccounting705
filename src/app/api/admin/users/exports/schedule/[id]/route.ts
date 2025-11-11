@@ -44,7 +44,7 @@ export const PATCH = withTenantContext(async (request: NextRequest, { params }: 
     }
 
     const context = tenantContext.getContext()
-    const hasAccess = await hasPermission(context.userId, 'admin:users:export')
+    const hasAccess = await hasPermission(context.userId, PERMISSIONS.USERS_EXPORT)
     if (!hasAccess) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
     }
@@ -103,7 +103,7 @@ export const DELETE = withTenantContext(async (request: NextRequest, { params }:
     }
 
     const context = tenantContext.getContext()
-    const hasAccess = await hasPermission(context.userId, 'admin:users:export')
+    const hasAccess = await hasPermission(context.userId, PERMISSIONS.USERS_EXPORT)
     if (!hasAccess) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
     }
