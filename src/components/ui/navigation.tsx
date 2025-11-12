@@ -69,7 +69,15 @@ function ClientNotificationsList() {
 
 import { useOrgSettings } from '@/components/providers/SettingsProvider'
 
-export function Navigation({ orgName = 'Accounting Firm', orgLogoUrl }: { orgName?: string; orgLogoUrl?: string }) {
+export function Navigation({
+  orgName = 'Accounting Firm',
+  orgLogoUrl,
+  currentLocale = 'en'
+}: {
+  orgName?: string
+  orgLogoUrl?: string
+  currentLocale?: Locale
+}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const pathname = usePathname()
   const { data: session, status } = useSession()
