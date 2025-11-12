@@ -338,9 +338,9 @@ model Tenant {
   entities              Entity[]
   consents              Consent[]
   verificationAttempts  VerificationAttempt[]
-  documentVersions      DocumentVersion[]
-  documentLinks         DocumentLink[]
-  documentAuditLogs     DocumentAuditLog[]
+  documentVersions      DocumentVersion[]     @relation("DocumentVersions")
+  documentLinks         DocumentLink[]        @relation("DocumentLinks")
+  documentAuditLogs     DocumentAuditLog[]    @relation("DocumentAuditLogs")
   supportTickets        SupportTicket[]           @relation("SupportTickets")
   knowledgeBaseCategories KnowledgeBaseCategory[]   @relation("KnowledgeBaseCategories")
   knowledgeBaseArticles KnowledgeBaseArticle[]      @relation("KnowledgeBaseArticles")
