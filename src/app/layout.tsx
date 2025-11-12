@@ -115,7 +115,15 @@ export default async function RootLayout({
         </a>
         <TranslationProvider initialLocale={userLocale as any} initialTranslations={serverTranslations}>
           <SettingsProvider initialSettings={{ name: orgName, logoUrl: orgLogoUrl ?? null, contactEmail: contactEmail ?? null, contactPhone: contactPhone ?? null, legalLinks: legalLinks ?? null, defaultLocale: orgLocale }}>
-              <ClientLayout session={session} orgName={orgName} orgLogoUrl={orgLogoUrl || undefined} contactEmail={contactEmail || undefined} contactPhone={contactPhone || undefined} legalLinks={legalLinks || undefined}>
+              <ClientLayout
+                session={session}
+                orgName={orgName}
+                orgLogoUrl={orgLogoUrl || undefined}
+                contactEmail={contactEmail || undefined}
+                contactPhone={contactPhone || undefined}
+                legalLinks={legalLinks || undefined}
+                locale={userLocale}
+              >
                 {children}
               </ClientLayout>
           </SettingsProvider>
