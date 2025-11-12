@@ -332,6 +332,9 @@ model Tenant {
   entities              Entity[]
   consents              Consent[]
   verificationAttempts  VerificationAttempt[]
+  documentVersions      DocumentVersion[]
+  documentLinks         DocumentLink[]
+  documentAuditLogs     DocumentAuditLog[]
 
   @@index([status])
 }
