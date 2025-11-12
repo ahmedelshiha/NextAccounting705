@@ -66,6 +66,7 @@ CREATE TABLE IF NOT EXISTS "entity_licenses" (
 
   CONSTRAINT "entity_licenses_entityId_country_licenseNumber_key" UNIQUE("entityId", "country", "licenseNumber"),
   CONSTRAINT "entity_licenses_entityId_fkey" FOREIGN KEY ("entityId") REFERENCES "entities"("id") ON DELETE CASCADE,
+  CONSTRAINT "entity_licenses_entityId_fkey" FOREIGN KEY ("entityId") REFERENCES "entities"("id") ON DELETE CASCADE,
   CONSTRAINT "entity_licenses_economicZoneId_fkey" FOREIGN KEY ("economicZoneId") REFERENCES "economic_zones"("id") ON DELETE SET NULL
 );
 
