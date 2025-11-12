@@ -5,6 +5,7 @@ import { tenantContext } from '@/lib/tenant-context'
 import { hasPermission } from '@/lib/permissions'
 import { rateLimitAsync } from '@/lib/rate-limit'
 import { generateReportHTML, applyFilters, calculateSummaryStats } from '@/app/admin/users/utils/report-builder'
+import { Report, ReportSection } from '@/app/admin/users/types/report-builder'
 
 export const POST = withTenantContext(async (request: NextRequest, { params }: { params: { id: string } }) => {
   try {
@@ -32,6 +33,19 @@ export const POST = withTenantContext(async (request: NextRequest, { params }: {
       return NextResponse.json({ error: 'Invalid export format. Supported: pdf, xlsx, csv, json' }, { status: 400 })
     }
 
+    // Cast sections to properly handle Prisma JSON types
+    const sections = Array.isArray(report.sections) ? (report.sections as unknown as ReportSection[]) : []
+    const typedReport: Report = {
+      id: report.id,
+      tenantId: report.tenantId,
+      userId: report.userId,
+      name: report.name,
+      description: report.description ?? undefined,
+      sections: sections,
+      createdAt: report.createdAt.toISOString(),
+      updatedAt: report.updatedAt.toISOString()
+    }
+
     const execution = await prisma.reportExecution.create({
       data: {
         id: crypto.randomUUID(),
@@ -48,13 +62,11 @@ export const POST = withTenantContext(async (request: NextRequest, { params }: {
           id: true,
           name: true,
           email: true,
-          phone: true,
           role: true,
           availabilityStatus: true,
           department: true,
           position: true,
-          createdAt: true,
-          lastLoginAt: true
+          createdAt: true
         }
       })
 
@@ -63,11 +75,12 @@ export const POST = withTenantContext(async (request: NextRequest, { params }: {
         data = applyFilters(data, filters)
       }
 
+      // Sections already properly typed above
       const reportData = {
-        columns: report.sections[0]?.columns || [],
+        columns: sections[0]?.columns || [],
         rows: data,
         rowCount: data.length,
-        summary: calculateSummaryStats(data, report.sections[0]?.calculations || [])
+        summary: calculateSummaryStats(data, sections[0]?.calculations || [])
       }
 
       let generatedContent = ''
@@ -76,17 +89,17 @@ export const POST = withTenantContext(async (request: NextRequest, { params }: {
 
       switch (format) {
         case 'pdf':
-          generatedContent = generateReportHTML(report, reportData)
+          generatedContent = generateReportHTML(typedReport, reportData)
           contentType = 'text/html'
           filename += '.html'
           break
         case 'xlsx':
-          generatedContent = generateExcelReport(report, reportData)
+          generatedContent = generateExcelReport(typedReport, reportData)
           contentType = 'text/tab-separated-values'
           filename += '.xlsx'
           break
         case 'csv':
-          generatedContent = generateCSVReport(report, reportData)
+          generatedContent = generateCSVReport(typedReport, reportData)
           contentType = 'text/csv'
           filename += '.csv'
           break
@@ -158,9 +171,9 @@ function generateExcelReport(report: any, reportData: any): string {
       { name: 'role', label: 'Role' },
       { name: 'availabilityStatus', label: 'Status' }
     ]
-    tsv += columns.map(c => c.label).join('\t') + '\n'
+    tsv += columns.map((c: any) => c.label).join('\t') + '\n'
     reportData.rows.forEach((row: any) => {
-      tsv += columns.map(c => row[c.name] || '').join('\t') + '\n'
+      tsv += columns.map((c: any) => row[c.name] || '').join('\t') + '\n'
     })
   }
   return tsv
