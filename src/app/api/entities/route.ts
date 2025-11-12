@@ -46,13 +46,13 @@ const _api_GET = async (request: NextRequest) => {
 
     const filters = {
       country: searchParams.get("country") || undefined,
-      status: searchParams.get("status") || undefined,
+      status: (searchParams.get("status") || undefined) as any,
       search: searchParams.get("search") || undefined,
       skip: searchParams.get("skip") ? parseInt(searchParams.get("skip")!) : 0,
       take: searchParams.get("take") ? parseInt(searchParams.get("take")!) : 50,
     };
 
-    const entities = await entityService.listEntities(ctx.tenantId!, filters);
+    const entities = await entityService.listEntities(ctx.tenantId!, filters as any);
 
     return NextResponse.json({
       success: true,
